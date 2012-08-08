@@ -5,9 +5,9 @@ __Notice component for iOS__
 - No images needed, all CoreGraphics code
 - Works on iPhone and iPad (resolution independent)
 
-![AJNotificationView](https://github.com/ajerez/AJNotificationView/blob/master/screenshot.png)
+![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot.png)
 
-![AJNotificationView](https://github.com/ajerez/AJNotificationView/blob/master/screenshot2.png)
+![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot2.png)
 
 
 ## Example Usage
