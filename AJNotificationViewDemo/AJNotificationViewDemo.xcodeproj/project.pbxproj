@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB1F1D3F15CA8B480058D877 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F1D3E15CA8B480058D877 /* UIKit.framework */; };
+		CB1F1D4115CA8B480058D877 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F1D4015CA8B480058D877 /* Foundation.framework */; };
+		CB1F1D4315CA8B480058D877 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F1D4215CA8B480058D877 /* CoreGraphics.framework */; };
+		CB1F1D4915CA8B480058D877 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB1F1D4715CA8B480058D877 /* InfoPlist.strings */; };
+		CB1F1D4B15CA8B480058D877 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F1D4A15CA8B480058D877 /* main.m */; };
+		CB1F1D4F15CA8B480058D877 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F1D4E15CA8B480058D877 /* AppDelegate.m */; };
+		CB1F1D5215CA8B480058D877 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F1D5115CA8B480058D877 /* ViewController.m */; };
+		CB1F1D5515CA8B480058D877 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1F1D5315CA8B480058D877 /* ViewController_iPhone.xib */; };
+		CB1F1D5815CA8B480058D877 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1F1D5615CA8B480058D877 /* ViewController_iPad.xib */; };
+		CB1F1D6115CA8BA40058D877 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F1D6015CA8BA40058D877 /* AJNotificationView.m */; };
+		CB1F1D6315CA8EAD0058D877 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F1D6215CA8EAD0058D877 /* QuartzCore.framework */; };
+		CB91985D15CBF9E400269C5B /* pattern@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91985B15CBF9E400269C5B /* pattern@2X.png */; };
+		CB91985E15CBF9E400269C5B /* pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91985C15CBF9E400269C5B /* pattern.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CB1F1D3A15CA8B480058D877 /* AJNotificationViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AJNotificationViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1F1D3E15CA8B480058D877 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CB1F1D4015CA8B480058D877 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CB1F1D4215CA8B480058D877 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CB1F1D4615CA8B480058D877 /* AJNotificationViewDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AJNotificationViewDemo-Info.plist"; sourceTree = "<group>"; };
+		CB1F1D4815CA8B480058D877 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB1F1D4A15CA8B480058D877 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CB1F1D4C15CA8B480058D877 /* AJNotificationViewDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AJNotificationViewDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CB1F1D4D15CA8B480058D877 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CB1F1D4E15CA8B480058D877 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CB1F1D5015CA8B480058D877 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CB1F1D5115CA8B480058D877 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CB1F1D5415CA8B480058D877 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		CB1F1D5715CA8B480058D877 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		CB1F1D5F15CA8BA40058D877 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJNotificationView.h; path = ../../AJNotificationView/AJNotificationView.h; sourceTree = "<group>"; };
+		CB1F1D6015CA8BA40058D877 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AJNotificationView.m; path = ../../AJNotificationView/AJNotificationView.m; sourceTree = "<group>"; };
+		CB1F1D6215CA8EAD0058D877 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB91985B15CBF9E400269C5B /* pattern@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern@2X.png"; sourceTree = "<group>"; };
+		CB91985C15CBF9E400269C5B /* pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB1F1D3715CA8B480058D877 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1F1D6315CA8EAD0058D877 /* QuartzCore.framework in Frameworks */,
+				CB1F1D3F15CA8B480058D877 /* UIKit.framework in Frameworks */,
+				CB1F1D4115CA8B480058D877 /* Foundation.framework in Frameworks */,
+				CB1F1D4315CA8B480058D877 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB1F1D2F15CA8B470058D877 = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D4415CA8B480058D877 /* AJNotificationViewDemo */,
+				CB1F1D3D15CA8B480058D877 /* Frameworks */,
+				CB1F1D3B15CA8B480058D877 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB1F1D3B15CA8B480058D877 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D3A15CA8B480058D877 /* AJNotificationViewDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB1F1D3D15CA8B480058D877 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D6215CA8EAD0058D877 /* QuartzCore.framework */,
+				CB1F1D3E15CA8B480058D877 /* UIKit.framework */,
+				CB1F1D4015CA8B480058D877 /* Foundation.framework */,
+				CB1F1D4215CA8B480058D877 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB1F1D4415CA8B480058D877 /* AJNotificationViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D5E15CA8B5F0058D877 /* AJNotificationView */,
+				CB1F1D4D15CA8B480058D877 /* AppDelegate.h */,
+				CB1F1D4E15CA8B480058D877 /* AppDelegate.m */,
+				CB1F1D5015CA8B480058D877 /* ViewController.h */,
+				CB1F1D5115CA8B480058D877 /* ViewController.m */,
+				CB1F1D5315CA8B480058D877 /* ViewController_iPhone.xib */,
+				CB1F1D5615CA8B480058D877 /* ViewController_iPad.xib */,
+				CB91985B15CBF9E400269C5B /* pattern@2X.png */,
+				CB91985C15CBF9E400269C5B /* pattern.png */,
+				CB1F1D4515CA8B480058D877 /* Supporting Files */,
+			);
+			path = AJNotificationViewDemo;
+			sourceTree = "<group>";
+		};
+		CB1F1D4515CA8B480058D877 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D4615CA8B480058D877 /* AJNotificationViewDemo-Info.plist */,
+				CB1F1D4715CA8B480058D877 /* InfoPlist.strings */,
+				CB1F1D4A15CA8B480058D877 /* main.m */,
+				CB1F1D4C15CA8B480058D877 /* AJNotificationViewDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB1F1D5E15CA8B5F0058D877 /* AJNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				CB1F1D5F15CA8BA40058D877 /* AJNotificationView.h */,
+				CB1F1D6015CA8BA40058D877 /* AJNotificationView.m */,
+			);
+			name = AJNotificationView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB1F1D3915CA8B480058D877 /* AJNotificationViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB1F1D5B15CA8B480058D877 /* Build configuration list for PBXNativeTarget "AJNotificationViewDemo" */;
+			buildPhases = (
+				CB1F1D3615CA8B480058D877 /* Sources */,
+				CB1F1D3715CA8B480058D877 /* Frameworks */,
+				CB1F1D3815CA8B480058D877 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AJNotificationViewDemo;
+			productName = AJNotificationViewDemo;
+			productReference = CB1F1D3A15CA8B480058D877 /* AJNotificationViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB1F1D3115CA8B470058D877 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = CodeApps;
+			};
+			buildConfigurationList = CB1F1D3415CA8B470058D877 /* Build configuration list for PBXProject "AJNotificationViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CB1F1D2F15CA8B470058D877;
+			productRefGroup = CB1F1D3B15CA8B480058D877 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB1F1D3915CA8B480058D877 /* AJNotificationViewDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CB1F1D3815CA8B480058D877 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1F1D4915CA8B480058D877 /* InfoPlist.strings in Resources */,
+				CB1F1D5515CA8B480058D877 /* ViewController_iPhone.xib in Resources */,
+				CB1F1D5815CA8B480058D877 /* ViewController_iPad.xib in Resources */,
+				CB91985D15CBF9E400269C5B /* pattern@2X.png in Resources */,
+				CB91985E15CBF9E400269C5B /* pattern.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB1F1D3615CA8B480058D877 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1F1D4B15CA8B480058D877 /* main.m in Sources */,
+				CB1F1D4F15CA8B480058D877 /* AppDelegate.m in Sources */,
+				CB1F1D5215CA8B480058D877 /* ViewController.m in Sources */,
+				CB1F1D6115CA8BA40058D877 /* AJNotificationView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CB1F1D4715CA8B480058D877 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1F1D4815CA8B480058D877 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CB1F1D5315CA8B480058D877 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1F1D5415CA8B480058D877 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		CB1F1D5615CA8B480058D877 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1F1D5715CA8B480058D877 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CB1F1D5915CA8B480058D877 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB1F1D5A15CA8B480058D877 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CB1F1D5C15CA8B480058D877 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AJNotificationViewDemo/AJNotificationViewDemo-Prefix.pch";
+				INFOPLIST_FILE = "AJNotificationViewDemo/AJNotificationViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CB1F1D5D15CA8B480058D877 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AJNotificationViewDemo/AJNotificationViewDemo-Prefix.pch";
+				INFOPLIST_FILE = "AJNotificationViewDemo/AJNotificationViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB1F1D3415CA8B470058D877 /* Build configuration list for PBXProject "AJNotificationViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1F1D5915CA8B480058D877 /* Debug */,
+				CB1F1D5A15CA8B480058D877 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB1F1D5B15CA8B480058D877 /* Build configuration list for PBXNativeTarget "AJNotificationViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1F1D5C15CA8B480058D877 /* Debug */,
+				CB1F1D5D15CA8B480058D877 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CB1F1D3115CA8B470058D877 /* Project object */;
+}
