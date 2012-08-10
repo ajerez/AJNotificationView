@@ -30,10 +30,19 @@ typedef enum {
     AJNotificationTypeOrange
 } AJNotificationType;
 
+typedef enum {
+    AJLinedBackgroundTypeDisabled,
+    AJLinedBackgroundTypeStatic,
+    AJLinedBackgroundTypeAnimated
+} AJLinedBackgroundType;
+
 @interface AJNotificationView : UIView
+
+
 
 //If enabled, draw lines in background (Enabled for default)
 @property(nonatomic,assign) BOOL linedBackground;
+
 
 //Show default notification (gray), hide after 2.5 seg
 + (void)showNoticeInView:(UIView *)view title:(NSString *)title;
@@ -43,6 +52,6 @@ typedef enum {
 
 + (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval;
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(BOOL)linedBackground hideAfter:(NSTimeInterval)hideInterval;
++ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval;
 @end
 

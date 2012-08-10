@@ -48,36 +48,37 @@
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeDefault
                                    title:@"Information notification"
-                         linedBackground:NO
+                         linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:2.5f];
 }
 - (IBAction)showBlueNotification:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
-                                   title:@"Success notification (Blue)"
+                                   title:@"Success notification 1 (Blue)"
+                         linedBackground:AJLinedBackgroundTypeAnimated
                                hideAfter:2.5f];
 }
 
 - (IBAction)showBlueNotificationWithoutlines:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
-                                   title:@"Success notification (Blue)"
-                         linedBackground:NO
+                                   title:@"Success notification 2 (Blue)"
+                         linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:2.5f];
 }
 
 - (IBAction)showGreenNotification:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeGreen
-                                   title:@"Success notification (Green)"
+                                   title:@"Success notification 1 (Green)"
                                hideAfter:2.5f];
 }
 
 - (IBAction)showGreenNotificationWithoutlines:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeGreen
-                                   title:@"Success notification (Green)"
-                         linedBackground:NO
+                                   title:@"Success notification 2 (Green)"
+                         linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:2.5f];
 }
 
@@ -92,7 +93,7 @@
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeRed
                                    title:@"Error notification"
-                         linedBackground:NO
+                         linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:2.5f];
 }
 
@@ -100,6 +101,7 @@
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeOrange
                                    title:@"Warning notification"
+                         linedBackground:AJLinedBackgroundTypeAnimated
                                hideAfter:2.5f];
 }
 
@@ -107,7 +109,7 @@
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeOrange
                                    title:@"Warning notification"
-                         linedBackground:NO
+                         linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:2.5f];
 }
 

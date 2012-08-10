@@ -26,6 +26,10 @@
 
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic) AJNotificationType notificationType;
+@property (nonatomic) AJLinedBackgroundType backgroundType;
+@property (nonatomic,assign) NSTimer* animationTimer;
+@property (nonatomic, assign) float moveFactor;
+
 - (void)_drawBackgroundInRect:(CGRect)rect;
 
 @end
@@ -45,6 +49,8 @@
         self.alpha = 0.0f;
         _notificationType = AJNotificationTypeDefault;
         _linedBackground = YES;
+        self.animationTimer = nil;
+
         //Title Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
@@ -79,19 +85,37 @@
 }
 
 + (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
-    [self showNoticeInView:view type:type title:title linedBackground:YES hideAfter:hideInterval];
-
+    [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
 }
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(BOOL)linedBackground hideAfter:(NSTimeInterval)hideInterval{
++ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
     
-    AJNotificationView *noticeView = [[AJNotificationView alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
+    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
-    noticeView.linedBackground = linedBackground;
+    noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
     [view addSubview:noticeView];
     
-    [view setNeedsDisplay];
+    [noticeView setNeedsDisplay];
+    
+    BOOL animated = backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
+    
+    if (animated){
+        if (nil == noticeView.animationTimer)
+        {
+            noticeView.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
+                                                                   target:noticeView
+                                                                 selector:@selector(setNeedsDisplay)
+                                                                 userInfo:nil
+                                                                  repeats:YES];
+        }
+    }
+    else{
+        if (noticeView.animationTimer && noticeView.animationTimer.isValid)
+            [noticeView.animationTimer invalidate];
+        
+        noticeView.animationTimer = nil;
+    }
     
     //Animation
     [UIView animateWithDuration:0.5f
@@ -148,6 +172,8 @@
 
 - (void)_drawBackgroundInRect:(CGRect)rect{
     
+    self.moveFactor = self.moveFactor > 14.0f ? 0.0f : ++self.moveFactor;
+
     UIColor *firstColor = nil;
     UIColor *secondColor = nil;
     UIColor *toplineColor = nil;
@@ -251,6 +277,9 @@
     self.layer.shadowOffset = CGSizeMake(0.0, 2.0);
     self.layer.shadowRadius = 2.0f;
     
+
+    
+    
     if (self.linedBackground){
         //Lines
         CGContextSaveGState(ctx); 
@@ -258,8 +287,8 @@
         CGMutablePathRef path = CGPathCreateMutable();
         int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);
         for(int i=1; i<=lines; i++) {
-            CGPathMoveToPoint(path, NULL, 16.0f * i, 1.0f);
-            CGPathAddLineToPoint(path, NULL, 1.0f, 16.0f * i);
+            CGPathMoveToPoint(path, NULL, 16.0f * i + -self.moveFactor, 1.0f);
+            CGPathAddLineToPoint(path, NULL, 1.0f, 16.0f * i + -self.moveFactor);
         }
         CGContextAddPath(ctx, path);
         CGPathRelease(path);
