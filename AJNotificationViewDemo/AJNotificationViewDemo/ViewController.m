@@ -18,9 +18,7 @@
 @synthesize secondView;
 
 - (void)viewDidLoad{
-    isDarkBackground = NO;
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern.png"]];
-    
+    isDarkBackground = NO;    
     [super viewDidLoad];
 }
 
@@ -46,11 +44,25 @@
                                    title:@"Information notification"
                                hideAfter:2.5f];
 }
-
+- (IBAction)showNotificactionWithoutlines:(id)sender {
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeDefault
+                                   title:@"Information notification"
+                         linedBackground:NO
+                               hideAfter:2.5f];
+}
 - (IBAction)showBlueNotification:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
                                    title:@"Success notification (Blue)"
+                               hideAfter:2.5f];
+}
+
+- (IBAction)showBlueNotificationWithoutlines:(id)sender {
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeBlue
+                                   title:@"Success notification (Blue)"
+                         linedBackground:NO
                                hideAfter:2.5f];
 }
 
@@ -61,6 +73,14 @@
                                hideAfter:2.5f];
 }
 
+- (IBAction)showGreenNotificationWithoutlines:(id)sender {
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeGreen
+                                   title:@"Success notification (Green)"
+                         linedBackground:NO
+                               hideAfter:2.5f];
+}
+
 - (IBAction)showRedNotification:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeRed
@@ -68,10 +88,26 @@
                                hideAfter:2.5f];
 }
 
+- (IBAction)showRedNotificationWithoutlines:(id)sender {
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeRed
+                                   title:@"Error notification"
+                         linedBackground:NO
+                               hideAfter:2.5f];
+}
+
 - (IBAction)showOrangeNotification:(id)sender {
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeOrange
                                    title:@"Warning notification"
+                               hideAfter:2.5f];
+}
+
+- (IBAction)showOrangeNotificationWithoutlines:(id)sender {
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeOrange
+                                   title:@"Warning notification"
+                         linedBackground:NO
                                hideAfter:2.5f];
 }
 

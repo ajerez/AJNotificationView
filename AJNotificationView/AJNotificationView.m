@@ -7,11 +7,17 @@
 //
 //Copyright © 2012 Alberto Jerez - CodeApps
 //
-//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”),
+//to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
 //The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
-//THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OU
+//THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//IN THE SOFTWARE.
+
 
 #import "AJNotificationView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -38,7 +44,7 @@
     if (self) {
         self.alpha = 0.0f;
         _notificationType = AJNotificationTypeDefault;
-        
+        _linedBackground = YES;
         //Title Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
@@ -73,13 +79,19 @@
 }
 
 + (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
+    [self showNoticeInView:view type:type title:title linedBackground:YES hideAfter:hideInterval];
+
+}
+
++ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(BOOL)linedBackground hideAfter:(NSTimeInterval)hideInterval{
     
     AJNotificationView *noticeView = [[AJNotificationView alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
+    noticeView.linedBackground = linedBackground;
     [view addSubview:noticeView];
     
-    [view setNeedsDisplay]; 
+    [view setNeedsDisplay];
     
     //Animation
     [UIView animateWithDuration:0.5f
@@ -239,22 +251,24 @@
     self.layer.shadowOffset = CGSizeMake(0.0, 2.0);
     self.layer.shadowRadius = 2.0f;
     
-    //Lines
-    CGContextSaveGState(ctx); 
-    CGContextClipToRect(ctx, self.bounds);
-    CGMutablePathRef path = CGPathCreateMutable();
-    int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);
-    for(int i=1; i<=lines; i++) {
-        CGPathMoveToPoint(path, NULL, 16.0f * i, 1.0f);
-        CGPathAddLineToPoint(path, NULL, 1.0f, 16.0f * i);
+    if (self.linedBackground){
+        //Lines
+        CGContextSaveGState(ctx); 
+        CGContextClipToRect(ctx, self.bounds);
+        CGMutablePathRef path = CGPathCreateMutable();
+        int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);
+        for(int i=1; i<=lines; i++) {
+            CGPathMoveToPoint(path, NULL, 16.0f * i, 1.0f);
+            CGPathAddLineToPoint(path, NULL, 1.0f, 16.0f * i);
+        }
+        CGContextAddPath(ctx, path);
+        CGPathRelease(path);
+        CGContextSetLineWidth(ctx, 6.0f);
+        CGContextSetLineCap(ctx, kCGLineCapRound);
+        CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.1].CGColor);
+        CGContextDrawPath(ctx, kCGPathStroke);
+        CGContextRestoreGState(ctx);
     }
-    CGContextAddPath(ctx, path);
-    CGPathRelease(path);
-    CGContextSetLineWidth(ctx, 6.0f);
-    CGContextSetLineCap(ctx, kCGLineCapRound);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.1].CGColor);
-    CGContextDrawPath(ctx, kCGPathStroke);
-    CGContextRestoreGState(ctx);
     
 }
 @end

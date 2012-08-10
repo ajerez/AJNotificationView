@@ -15,7 +15,10 @@
 - (IBAction)showGreenNotification:(id)sender;
 - (IBAction)showRedNotification:(id)sender;
 - (IBAction)showOrangeNotification:(id)sender;
-
 - (IBAction)changeBackground:(id)sender;
-
+- (IBAction)showNotificactionWithoutlines:(id)sender;
+- (IBAction)showBlueNotificationWithoutlines:(id)sender;
+- (IBAction)showGreenNotificationWithoutlines:(id)sender;
+- (IBAction)showRedNotificationWithoutlines:(id)sender;
+- (IBAction)showOrangeNotificationWithoutlines:(id)sender;
 @end
