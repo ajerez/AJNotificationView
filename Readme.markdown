@@ -32,7 +32,7 @@ Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your 
 [AJNotificationView showNoticeInView:self.view
                                 type:AJNotificationTypeOrange
                                title:@"Test notification"
-                     linedBackground:AJLinedBackgroundTypeAnimated
+                     linedBackground:AJLinedBackgroundTypeDisabled
                            hideAfter:0];
 ```
 
