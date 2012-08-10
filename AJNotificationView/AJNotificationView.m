@@ -132,7 +132,8 @@
                      completion:^(BOOL finished) {
                          if (finished){
                              //Hide
-                             [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
+                             if (hideInterval != 0)
+                                 [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
                          }
                      }];
 }
