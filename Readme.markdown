@@ -4,6 +4,7 @@ __Notice component for iOS__
 
 - No images needed, all CoreGraphics code
 - Works on iPhone and iPad (resolution independent)
+- Animated background type
 
 ![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot.png)
 
@@ -12,7 +13,7 @@ __Notice component for iOS__
 
 ## Example Usage
 
-Add __QuartzCore.framework__ to your project and drop the __AJNotificationView__ folder in your project
+Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your project
 
 
 
@@ -20,6 +21,7 @@ Add __QuartzCore.framework__ to your project and drop the __AJNotificationView__
 [AJNotificationView showNoticeInView:self.view
                                 type:AJNotificationTypeBlue
                                title:@"Test notification"
+                     linedBackground:AJLinedBackgroundTypeAnimated
                            hideAfter:2.5f];
 ```
 
@@ -30,6 +32,13 @@ There are several __notification styles__ to choose from:
 * `AJNotificationTypeRed`
 * `AJNotificationTypeGreen`
 * `AJNotificationTypeOrange`
+
+And background types:
+
+* `AJLinedBackgroundTypeDisabled`
+* `AJLinedBackgroundTypeStatic` _<-- Default_
+* `AJLinedBackgroundTypeAnimated`
+
 
 ## Contact
 Twitter: [@alberto_jrz](https://twitter.com/alberto_jrz)
