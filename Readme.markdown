@@ -18,11 +18,22 @@ Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your 
 
 
 ``` objective-c
+//Blue notification with animated lined background. Hides after 2,5 seg
 [AJNotificationView showNoticeInView:self.view
                                 type:AJNotificationTypeBlue
                                title:@"Test notification"
                      linedBackground:AJLinedBackgroundTypeAnimated
                            hideAfter:2.5f];
+```
+
+
+``` objective-c
+// Orange notification without lined background. Remains visible until the user taps in it.
+[AJNotificationView showNoticeInView:self.view
+                                type:AJNotificationTypeOrange
+                               title:@"Test notification"
+                     linedBackground:AJLinedBackgroundTypeAnimated
+                           hideAfter:0];
 ```
 
 There are several __notification styles__ to choose from:
@@ -39,6 +50,12 @@ And background types:
 * `AJLinedBackgroundTypeStatic` _<-- Default_
 * `AJLinedBackgroundTypeAnimated`
 
+
+## Future improvements
+
+* Code rafactoring
+* Ability to hide the notification without sending the "hideInterval" value
+* More background colors (Notification styles)
 
 ## Contact
 Twitter: [@alberto_jrz](https://twitter.com/alberto_jrz)
