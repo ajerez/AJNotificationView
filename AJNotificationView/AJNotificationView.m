@@ -29,6 +29,7 @@
 @property (nonatomic) AJLinedBackgroundType backgroundType;
 @property (nonatomic,assign) NSTimer* animationTimer;
 @property (nonatomic, assign) float moveFactor;
+@property(nonatomic,assign) BOOL linedBackground;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
 
@@ -276,8 +277,6 @@
     self.layer.shadowOpacity = 0.5f;
     self.layer.shadowOffset = CGSizeMake(0.0, 2.0);
     self.layer.shadowRadius = 2.0f;
-    
-
     
     
     if (self.linedBackground){
