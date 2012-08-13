@@ -6,6 +6,8 @@ __Notice component for iOS__
 - Works on iPhone and iPad (resolution independent)
 - Animated background type
 
+### [__Video demo__](https://vimeo.com/47447275)
+
 ![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot.png)
 
 ![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot2.png)
