@@ -118,6 +118,9 @@
         noticeView.animationTimer = nil;
     }
     
+    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
+    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
+    
     //Animation
     [UIView animateWithDuration:0.5f
                           delay:0.0
