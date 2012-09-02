@@ -128,7 +128,7 @@
                      animations:^{
                          noticeView.alpha = 1.0;
                          noticeView.frame = CGRectMake(0.0,
-                                                       0.0,
+                                                       0.0 + statusBarOffset,
                                                        noticeView.frame.size.width,
                                                        noticeView.frame.size.height);
                      }
