@@ -75,21 +75,21 @@
 #pragma mark - Show
 ////////////////////////////////////////////////////////////////////////
 
-+ (void)showNoticeInView:(UIView *)view title:(NSString *)title{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title{
     //Use default notification type (gray)
-    [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
+    return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
 }
 
-+ (void)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
     //Use default notification type (gray)
-    [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
+    return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
 }
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
-    [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
+    return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
 }
 
-+ (void)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
     
     AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
     noticeView.notificationType = type;
@@ -138,10 +138,12 @@
                      completion:^(BOOL finished) {
                          if (finished){
                              //Hide
-                             if (hideInterval != 0)
+                             if (hideInterval > 0)
                                  [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
                          }
                      }];
+    
+    return noticeView;
 }
 
 ////////////////////////////////////////////////////////////////////////

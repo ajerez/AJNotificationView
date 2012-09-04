@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 - (IBAction)showNotificaction:(id)sender;
+- (IBAction)hideNotification:(id)sender;
 - (IBAction)showBlueNotification:(id)sender;
 - (IBAction)showGreenNotification:(id)sender;
 - (IBAction)showRedNotification:(id)sender;

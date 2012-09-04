@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 @interface ViewController (){
     BOOL isDarkBackground;
+    AJNotificationView *panel;
 }
 @end
 
@@ -40,9 +41,15 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (IBAction)showNotificaction:(id)sender {
-    [AJNotificationView showNoticeInView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
+    panel = [AJNotificationView showNoticeInView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
                                    title:@"Information notification"
-                               hideAfter:2.5f];
+                               hideAfter:0];
+    
+}
+
+- (IBAction)hideNotification:(id)sender {
+    if (panel)
+        [panel hide];
 }
 - (IBAction)showNotificactionWithoutlines:(id)sender {
     [AJNotificationView showNoticeInView:self.view

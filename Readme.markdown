@@ -30,12 +30,14 @@ Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your 
 
 
 ``` objective-c
-// Orange notification without lined background. Remains visible until the user taps in it.
-[AJNotificationView showNoticeInView:self.view
+// Orange notification without lined background. Remains visible until the user taps in it, or you call hide method
+AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
                                 type:AJNotificationTypeOrange
                                title:@"Test notification"
                      linedBackground:AJLinedBackgroundTypeDisabled
                            hideAfter:0];
+//Your code
+[panel hide];
 ```
 
 There are several __notification styles__ to choose from:
@@ -56,7 +58,8 @@ And background types:
 ## Future improvements
 
 * Code rafactoring
-* Ability to hide the notification without sending the "hideInterval" value
+* ~~Ability to hide the notification without sending the "hideInterval" value
+~~
 * More background colors (Notification styles)
 
 ## Contact
