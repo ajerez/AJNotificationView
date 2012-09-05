@@ -59,6 +59,7 @@
         _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
         _titleLabel.lineBreakMode = UILineBreakModeWordWrap;
         _titleLabel.numberOfLines = 0;
+        _titleLabel.alpha = 0.0;
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_titleLabel];
     }
@@ -91,7 +92,7 @@
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
     
-    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, -60, view.bounds.size.width, PANELHEIGHT)];
+    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1)];
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
     noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
@@ -133,7 +134,8 @@
                          noticeView.frame = CGRectMake(0.0,
                                                        0.0 + statusBarOffset,
                                                        noticeView.frame.size.width,
-                                                       noticeView.frame.size.height);
+                                                       PANELHEIGHT);
+                         noticeView.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
                          if (finished){
@@ -151,15 +153,21 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (void)hide{
-    [UIView animateWithDuration:0.3f
+    if ([self.animationTimer isValid]){
+        [self.animationTimer invalidate];
+        self.animationTimer = nil;
+    }
+    
+    [UIView animateWithDuration:0.4f
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.alpha = 0.0;
                          self.frame = CGRectMake(0.0,
-                                                 -self.frame.size.height,
+                                                 0.0,
                                                  self.frame.size.width,
-                                                 self.frame.size.height);
+                                                 1.0);
+                         self.titleLabel.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
                          if (finished){
