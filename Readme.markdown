@@ -62,6 +62,12 @@ And background types:
 ~~
 * More background colors (Notification styles)
 
+## Inspiration
+
+* Thanks to Eli Perkins for [__YRDropDownView__](https://github.com/onemightyroar/YRDropdownView)
+* Thanks to Tito Ciuro for [__NoticeView__](https://github.com/tciuro/NoticeView)
+
+
 ## Contact
 Twitter: [@alberto_jrz](https://twitter.com/alberto_jrz)
 
