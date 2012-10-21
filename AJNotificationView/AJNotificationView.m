@@ -91,6 +91,16 @@
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
+    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
+    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
+    
+    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
+        statusBarOffset = 0.0;
+    
+    return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval offset:statusBarOffset];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset{
     
     AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1)];
     noticeView.notificationType = type;
@@ -132,7 +142,7 @@
                      animations:^{
                          noticeView.alpha = 1.0;
                          noticeView.frame = CGRectMake(0.0,
-                                                       0.0 + statusBarOffset,
+                                                       0.0 + offset,
                                                        noticeView.frame.size.width,
                                                        PANELHEIGHT);
                          noticeView.titleLabel.alpha = 1.0;
