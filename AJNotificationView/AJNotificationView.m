@@ -91,13 +91,8 @@
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
-    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
-        statusBarOffset = 0.0;
-    
-    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:statusBarOffset];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0];
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset{
@@ -130,10 +125,13 @@
     }
     
     //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
+    double statusBarOffset = ([view isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
+    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]]) {
+        
         statusBarOffset = 0.0;
+    }
+    offset = fmax(offset, statusBarOffset);
     
     //Animation
     [UIView animateWithDuration:0.5f
