@@ -97,7 +97,7 @@
     if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
         statusBarOffset = 0.0;
     
-    return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval offset:statusBarOffset];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:statusBarOffset];
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset{
