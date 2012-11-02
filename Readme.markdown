@@ -40,6 +40,23 @@ AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
 [panel hide];
 ```
 
+
+``` objective-c
+// Notification with delay, offset and response block that's called when the user tap in it.
+//Thanks to @DazeEnd for this awesome features
+[AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeBlue
+                                   title:@"Oppa Gangnam Style!"
+                         linedBackground:AJLinedBackgroundTypeDisabled
+                               hideAfter:2.5f
+                                  offset:50.0f
+                                   delay:1.0f
+                                response:^{
+                                    NSLog(@"User tap in the notification");
+                                }
+    ];
+```
+
 There are several __notification styles__ to choose from:
 
 * `AJNotificationTypeDefault` _<-- Gray_
@@ -58,8 +75,6 @@ And background types:
 ## Future improvements
 
 * Code rafactoring
-* ~~Ability to hide the notification without sending the "hideInterval" value
-~~
 * More background colors (Notification styles)
 
 ## Inspiration
