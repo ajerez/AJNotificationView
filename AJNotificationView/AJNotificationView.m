@@ -30,6 +30,7 @@
 @property (nonatomic,assign) NSTimer* animationTimer;
 @property (nonatomic, assign) float moveFactor;
 @property(nonatomic,assign) BOOL linedBackground;
+@property (nonatomic, copy) void (^responseBlock)(void);
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
 
@@ -45,11 +46,17 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
+    return [self initWithFrame:frame andResponseBlock:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame andResponseBlock:(void (^)(void))response
+{
     self = [super initWithFrame:frame];
     if (self) {
         self.alpha = 0.0f;
         _notificationType = AJNotificationTypeDefault;
         _linedBackground = YES;
+        _responseBlock = response;
         self.animationTimer = nil;
 
         //Title Label
@@ -91,18 +98,22 @@
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
-    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
-    
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
-        statusBarOffset = 0.0;
-    
-    return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval offset:statusBarOffset];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval response:nil];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval response:(void (^)(void))response {
     
-    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1)];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 response:response];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset {
+    
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:0.0 response:nil];
+}
+
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval response:(void (^)(void))response {
+    
+    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1) andResponseBlock:response];
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
     noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
@@ -130,14 +141,17 @@
     }
     
     //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    float statusBarOffset = [view isKindOfClass:[UIWindow class]] && [[UIApplication sharedApplication] isStatusBarHidden] ? 0.0 : [[UIApplication sharedApplication] statusBarFrame].size.height;
+    double statusBarOffset = ([view isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]])
+    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]]) {
+        
         statusBarOffset = 0.0;
+    }
+    offset = fmax(offset, statusBarOffset);
     
     //Animation
     [UIView animateWithDuration:0.5f
-                          delay:0.0
+                          delay:delayInterval
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          noticeView.alpha = 1.0;
@@ -192,6 +206,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self hide];
+    if(self.responseBlock != nil) {
+        self.responseBlock();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
