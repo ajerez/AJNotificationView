@@ -52,6 +52,8 @@
         [panel hide];
 }
 - (IBAction)showNotificactionWithoutlines:(id)sender {
+    
+    //Default demo
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeDefault
                                    title:@"Information notification"
@@ -59,19 +61,32 @@
                                hideAfter:2.5f];
 }
 - (IBAction)showBlueNotification:(id)sender {
+    //Demo with response block
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
                                    title:@"Success notification 1 (Blue)"
                          linedBackground:AJLinedBackgroundTypeAnimated
-                               hideAfter:2.5f];
+                               hideAfter:2.5f
+                                response:^{
+                                    //This block is called when user taps in the notification
+                                    NSLog(@"Response block");
+                                }
+     ];
 }
 
 - (IBAction)showBlueNotificationWithoutlines:(id)sender {
+    //Demo with offset, delay and response block
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
                                    title:@"Success notification 2 (Blue)"
                          linedBackground:AJLinedBackgroundTypeDisabled
-                               hideAfter:2.5f];
+                               hideAfter:2.5f
+                                  offset:50.0f
+                                   delay:1.0f
+                                response:^{
+                                    NSLog(@"Response block");
+                                }
+    ];
 }
 
 - (IBAction)showGreenNotification:(id)sender {
