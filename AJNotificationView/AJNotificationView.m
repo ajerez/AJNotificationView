@@ -25,6 +25,7 @@
 @interface AJNotificationView ()
 
 @property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *detailDisclosureButton;
 @property (nonatomic) AJNotificationType notificationType;
 @property (nonatomic) AJLinedBackgroundType backgroundType;
 @property (nonatomic,assign) NSTimer* animationTimer;
@@ -58,7 +59,7 @@
         _linedBackground = YES;
         _responseBlock = response;
         self.animationTimer = nil;
-
+        
         //Title Label
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
@@ -69,6 +70,13 @@
         _titleLabel.alpha = 0.0;
         _titleLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_titleLabel];
+        
+        // Button
+        _detailDisclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        _detailDisclosureButton.frame = CGRectMake(self.bounds.size.width - 10.0 - _detailDisclosureButton.frame.size.width, (PANELHEIGHT - _detailDisclosureButton.frame.size.height) / 2, _detailDisclosureButton.frame.size.width, _detailDisclosureButton.frame.size.height);
+        _detailDisclosureButton.hidden = YES;
+        [_detailDisclosureButton addTarget:self action:@selector(detailDisclosureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_detailDisclosureButton];
     }
     return self;
 }
@@ -77,6 +85,12 @@
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self _drawBackgroundInRect:(CGRect)rect];
+}
+
+- (void)detailDisclosureButtonPressed:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"detail_disclosure_button_pressed" object:self];
+    [self hide];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -101,17 +115,21 @@
     return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval response:nil];
 }
 
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval detailDisclosure:(BOOL)show {
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 detailDisclosure:show response:nil];
+}
+
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval response:(void (^)(void))response {
     
-    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 response:response];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:0.0 delay:0.0 detailDisclosure:NO response:response];
 }
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset {
     
-    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:0.0 response:nil];
+    return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval offset:offset delay:0.0 detailDisclosure:NO response:nil];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval response:(void (^)(void))response {
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval detailDisclosure:(BOOL)show response:(void (^)(void))response {
     
     AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1) andResponseBlock:response];
     noticeView.notificationType = type;
@@ -127,10 +145,10 @@
         if (nil == noticeView.animationTimer)
         {
             noticeView.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
-                                                                   target:noticeView
-                                                                 selector:@selector(setNeedsDisplay)
-                                                                 userInfo:nil
-                                                                  repeats:YES];
+                                                                         target:noticeView
+                                                                       selector:@selector(setNeedsDisplay)
+                                                                       userInfo:nil
+                                                                        repeats:YES];
         }
     }
     else{
@@ -163,6 +181,10 @@
                      }
                      completion:^(BOOL finished) {
                          if (finished){
+                             if (show) {
+                                 noticeView.detailDisclosureButton.hidden = !show;
+                             }
+                             
                              //Hide
                              if (hideInterval > 0)
                                  [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
@@ -218,7 +240,7 @@
 - (void)_drawBackgroundInRect:(CGRect)rect{
     
     self.moveFactor = self.moveFactor > 14.0f ? 0.0f : ++self.moveFactor;
-
+    
     UIColor *firstColor = nil;
     UIColor *secondColor = nil;
     UIColor *toplineColor = nil;
@@ -292,7 +314,7 @@
         green = components[1];
         blue = components[2];
         alpha = components[3];
-    }    
+    }
     CGContextSaveGState(ctx);
     CGContextSetRGBFillColor(ctx, 0.9f, 0.9f, 0.9f, 1.0f);
     CGContextFillRect(ctx, CGRectMake(0, 0, self.bounds.size.width, 1));
@@ -325,7 +347,7 @@
     
     if (self.linedBackground){
         //Lines
-        CGContextSaveGState(ctx); 
+        CGContextSaveGState(ctx);
         CGContextClipToRect(ctx, self.bounds);
         CGMutablePathRef path = CGPathCreateMutable();
         int lines = (self.bounds.size.width/16.0f + self.bounds.size.height);
