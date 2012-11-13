@@ -19,7 +19,12 @@
 @synthesize secondView;
 
 - (void)viewDidLoad{
-    isDarkBackground = NO;    
+    isDarkBackground = NO;
+    
+    // Register for detail disclosure notification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(detailDisclosureButtonPressed:) name:@"detail_disclosure_button_pressed"
+                                               object:nil];
     [super viewDidLoad];
 }
 
@@ -36,14 +41,17 @@
     }
 }
 
+- (void)detailDisclosureButtonPressed:(NSNotification*)notification{
+    NSLog(@"Detail disclosure button pressed");
+}
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Demo
 ////////////////////////////////////////////////////////////////////////
 
 - (IBAction)showNotificaction:(id)sender {
     panel = [AJNotificationView showNoticeInView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
-                                   title:@"Information notification"
-                               hideAfter:0];
+                                           title:@"Information notification"
+                                       hideAfter:0];
     
 }
 
@@ -86,7 +94,7 @@
                                 response:^{
                                     NSLog(@"Response block");
                                 }
-    ];
+     ];
 }
 
 - (IBAction)showGreenNotification:(id)sender {
@@ -129,10 +137,14 @@
 
 - (IBAction)showOrangeNotificationWithoutlines:(id)sender {
     [AJNotificationView showNoticeInView:self.view
-                                    type:AJNotificationTypeOrange
-                                   title:@"Warning notification"
-                         linedBackground:AJLinedBackgroundTypeDisabled
-                               hideAfter:2.5f];
+                                    type:AJNotificationTypeBlue
+                                   title:@"Detail disclosure notification"
+                         linedBackground:AJLinedBackgroundTypeAnimated
+                               hideAfter:2.5f offset:0.0f delay:0.0f detailDisclosure:YES
+                                response:^{
+                                    NSLog(@"Response block");
+                                }
+     ];
 }
 
 
