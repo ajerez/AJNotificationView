@@ -57,6 +57,44 @@ AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
     ];
 ```
 
+
+``` objective-c
+// Notification with delay, offset, response block and detail disclosure button that send a notification when the user tap in it
+//Thanks to @smoothdvd for this last feature
+
+//In viewDidLoad register the NSNotification
+- (void)viewDidLoad{   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(detailDisclosureButtonPressed:)
+                                                 name:@"detail_disclosure_button_pressed"
+                                               object:nil];
+   [super viewDidLoad];
+}
+
+//...
+//Function that's called when the NSNotification is fired
+- (void)detailDisclosureButtonPressed:(NSNotification*)notification{
+    NSLog(@"Detail disclosure button pressed");
+}
+
+//...
+//The code for show the AJNotificationView
+
+    [AJNotificationView showNoticeInView:self.view
+                                    type:AJNotificationTypeBlue
+                                   title:@"Detail disclosure notification"
+                         linedBackground:AJLinedBackgroundTypeAnimated
+                               hideAfter:2.5f
+                                  offset:0.0f
+                                   delay:0.0f
+                        detailDisclosure:YES
+                                response:^{
+                                    NSLog(@"Response block");
+                                }
+     ];
+```
+
+
 There are several __notification styles__ to choose from:
 
 * `AJNotificationTypeDefault` _<-- Gray_
