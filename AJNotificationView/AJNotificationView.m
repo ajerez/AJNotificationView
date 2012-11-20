@@ -34,17 +34,17 @@
 @property (nonatomic, copy) void (^responseBlock)(void);
 @property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, assign) float offset;
-@property (nonatomic, assign) NSTimeInterval delayInterval;
 @property (nonatomic, assign) NSTimeInterval hideInterval;
 @property (nonatomic, assign) BOOL showDetailDisclosure;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
 - (void) show;
 
-
 @end
 
 #define PANELHEIGHT  50.0f
+
+static NSMutableArray *notificationQueue = nil;       // Global notification queue
 
 @implementation AJNotificationView
 
@@ -151,16 +151,26 @@
     noticeView.parentView = view;
     noticeView.backgroundType = backgroundType;
     noticeView.offset = offset;
-    noticeView.delayInterval = delayInterval;
     noticeView.hideInterval = hideInterval;
     noticeView.showDetailDisclosure = show;
     
-    [noticeView show];
+    if(notificationQueue == nil) {
+        
+        notificationQueue = [[NSMutableArray alloc] init];
+    }
+    
+    [notificationQueue addObject:noticeView];
+    
+    if([notificationQueue count] == 1) {
+        
+        // Since this notification is the only one in the queue, it can be shown and its delay interval can be honored.
+        [noticeView showAfterDelay:delayInterval];
+    }
     
     return noticeView;
 }
 
-- (void) show {
+- (void) showAfterDelay:(NSTimeInterval)delayInterval {
     
     [self.parentView addSubview:self];
     
@@ -196,7 +206,7 @@
     
     //Animation
     [UIView animateWithDuration:0.5f
-                          delay:self.delayInterval
+                          delay:delayInterval
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.alpha = 1.0;
@@ -243,6 +253,16 @@
                      completion:^(BOOL finished) {
                          if (finished){
                              [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
+                             
+                             // Remove this notification from the queue
+                             [notificationQueue removeObjectIdenticalTo:self];
+                             
+                             // Show the next notification in the queue
+                             if([notificationQueue count] > 0) {
+                                 
+                                 AJNotificationView *nextNotification = [notificationQueue objectAtIndex:0];
+                                 [nextNotification showAfterDelay:0];
+                             }
                          }
                      }];
 }
