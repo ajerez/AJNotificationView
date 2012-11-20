@@ -32,8 +32,15 @@
 @property (nonatomic, assign) float moveFactor;
 @property(nonatomic,assign) BOOL linedBackground;
 @property (nonatomic, copy) void (^responseBlock)(void);
+@property (nonatomic, strong) UIView *parentView;
+@property (nonatomic, assign) float offset;
+@property (nonatomic, assign) NSTimeInterval delayInterval;
+@property (nonatomic, assign) NSTimeInterval hideInterval;
+@property (nonatomic, assign) BOOL showDetailDisclosure;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
+- (void) show;
+
 
 @end
 
@@ -141,63 +148,75 @@
     noticeView.notificationType = type;
     noticeView.titleLabel.text = title;
     noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
-    [view addSubview:noticeView];
+    noticeView.parentView = view;
+    noticeView.backgroundType = backgroundType;
+    noticeView.offset = offset;
+    noticeView.delayInterval = delayInterval;
+    noticeView.hideInterval = hideInterval;
+    noticeView.showDetailDisclosure = show;
     
-    [noticeView setNeedsDisplay];
+    [noticeView show];
     
-    BOOL animated = backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
+    return noticeView;
+}
+
+- (void) show {
+    
+    [self.parentView addSubview:self];
+    
+    [self setNeedsDisplay];
+    
+    BOOL animated = self.backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
     
     if (animated){
-        if (nil == noticeView.animationTimer)
+        if (nil == self.animationTimer)
         {
-            noticeView.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
-                                                                         target:noticeView
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
+                                                                         target:self
                                                                        selector:@selector(setNeedsDisplay)
                                                                        userInfo:nil
                                                                         repeats:YES];
         }
     }
     else{
-        if (noticeView.animationTimer && noticeView.animationTimer.isValid)
-            [noticeView.animationTimer invalidate];
+        if (self.animationTimer && self.animationTimer.isValid)
+            [self.animationTimer invalidate];
         
-        noticeView.animationTimer = nil;
+        self.animationTimer = nil;
     }
     
-    //if view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
-    double statusBarOffset = ([view isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
+    //if parent view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
+    double statusBarOffset = ([self.parentView isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
     
-    if ([view isKindOfClass:[UIView class]] && ![view isKindOfClass:[UIWindow class]]) {
+    if ([self.parentView isKindOfClass:[UIView class]] && ![self.parentView isKindOfClass:[UIWindow class]]) {
         
         statusBarOffset = 0.0;
     }
-    offset = fmax(offset, statusBarOffset);
+    self.offset = fmax(self.offset, statusBarOffset);
     
     //Animation
     [UIView animateWithDuration:0.5f
-                          delay:delayInterval
+                          delay:self.delayInterval
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         noticeView.alpha = 1.0;
-                         noticeView.frame = CGRectMake(0.0,
-                                                       0.0 + offset,
-                                                       noticeView.frame.size.width,
+                         self.alpha = 1.0;
+                         self.frame = CGRectMake(0.0,
+                                                       0.0 + self.offset,
+                                                       self.frame.size.width,
                                                        PANELHEIGHT);
-                         noticeView.titleLabel.alpha = 1.0;
+                         self.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
                          if (finished){
-                             if (show) {
-                                 noticeView.detailDisclosureButton.hidden = !show;
+                             if (self.showDetailDisclosure) {
+                                 self.detailDisclosureButton.hidden = !self.showDetailDisclosure;
                              }
                              
                              //Hide
-                             if (hideInterval > 0)
-                                 [noticeView performSelector:@selector(hide) withObject:view afterDelay:hideInterval];
+                             if (self.hideInterval > 0)
+                                 [self performSelector:@selector(hide) withObject:self.parentView afterDelay:self.hideInterval];
                          }
                      }];
-    
-    return noticeView;
 }
 
 ////////////////////////////////////////////////////////////////////////
