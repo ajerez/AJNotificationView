@@ -38,7 +38,7 @@
 @property (nonatomic, assign) BOOL showDetailDisclosure;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
-- (void) show;
+- (void) showAfterDelay:(NSTimeInterval)delayInterval;
 
 @end
 
