@@ -5,6 +5,11 @@ __Notice component for iOS__
 - No images needed, all CoreGraphics code
 - Works on iPhone and iPad (resolution independent)
 - Animated background type
+- Only one notification is shown at
+a time. When a notification is created, it is added to the queue. If it is the
+only notification in the queue, then its delay interval is honored. If it is not
+the only notification in the queue, it is placed at the end of the queue, and
+then displayed without a delay once it reaches the front of the queue (Thanks to @DazeEnd).
 
 ### [__Video demo__](https://vimeo.com/47447275)
 
