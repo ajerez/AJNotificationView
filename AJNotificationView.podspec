@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author = { 'Alberto Jerez' => 'https://twitter.com/alberto_jrz' }
   s.source = {
     :git => 'https://github.com/ajerez/AJNotificationView',
-    :tag => '0.4'
+    :tag => 'v0.4'
   }
   s.description = 'Notice component for iPhone and iPad. All core graphics code and resolution independent.'
   s.source_files = 'AJNotificationView/*'
