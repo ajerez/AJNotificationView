@@ -204,6 +204,10 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     }
     self.offset = fmax(self.offset, statusBarOffset);
     
+    //Change label width if detail disclosure is active
+    if(self.showDetailDisclosure)
+        _titleLabel.frame = CGRectMake(10.0, 0, self.bounds.size.width -50, PANELHEIGHT);
+
     //Animation
     [UIView animateWithDuration:0.5f
                           delay:delayInterval

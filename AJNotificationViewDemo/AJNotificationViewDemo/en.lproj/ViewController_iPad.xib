@@ -280,7 +280,7 @@
 					<object class="IBUIButton" id="154385729">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{371, 462}, {166, 37}}</string>
+						<string key="NSFrame">{{371, 458}, {166, 44}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="897005378"/>
@@ -290,7 +290,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Orange (D.Disclosure)</string>
+						<string key="IBUINormalTitle">Blue (D.Disclosure)</string>
 						<reference key="IBUIHighlightedTitleColor" ref="473003991"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>

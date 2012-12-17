@@ -136,9 +136,18 @@
 }
 
 - (IBAction)showOrangeNotificationWithoutlines:(id)sender {
+    
+    NSString *title;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		title = @"Detail disclosure and long long long long long long long long long long long long long long long long long long long long long long long long text";
+	}
+    else{
+        title = @"Detail disclosure and long long long long long long long long text";
+    }
+    
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
-                                   title:@"Detail disclosure notification"
+                                   title:title
                          linedBackground:AJLinedBackgroundTypeAnimated
                                hideAfter:2.5f offset:0.0f delay:0.0f detailDisclosure:YES
                                 response:^{
