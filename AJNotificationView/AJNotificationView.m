@@ -329,6 +329,12 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
             self.titleLabel.textColor = [UIColor whiteColor];
             break;
         }
+        case AJNotificationTypeWhite: { //White
+            firstColor = RGBA(248, 248, 248, 1.0);
+            secondColor = RGBA(245, 245, 245, 1.0);
+            toplineColor = RGBA(250, 250, 250, 1.0);
+            break;
+        }
         default: { //Gray
             firstColor = RGBA(210, 210, 210, 1.0);
             secondColor = RGBA(180, 180, 180, 1.0);
@@ -408,7 +414,10 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
         CGPathRelease(path);
         CGContextSetLineWidth(ctx, 6.0f);
         CGContextSetLineCap(ctx, kCGLineCapRound);
-        CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.1].CGColor);
+        if (self.notificationType == AJNotificationTypeWhite)
+            CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:20.f green:20.f blue:20.f alpha:0.45f].CGColor);
+        else
+            CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.1].CGColor);
         CGContextDrawPath(ctx, kCGPathStroke);
         CGContextRestoreGState(ctx);
     }
