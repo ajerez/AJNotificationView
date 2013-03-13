@@ -49,16 +49,16 @@
 ////////////////////////////////////////////////////////////////////////
 
 - (IBAction)showNotificaction:(id)sender {
-    panel = [AJNotificationView showNoticeInView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
+    [AJNotificationView showNoticeInView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
                                            title:@"Information notification"
                                        hideAfter:0];
     
 }
 
 - (IBAction)hideNotification:(id)sender {
-    if (panel)
-        [panel hide];
+    [AJNotificationView hideCurrentNotificationView];
 }
+
 - (IBAction)showNotificactionWithoutlines:(id)sender {
     
     //Default demo
