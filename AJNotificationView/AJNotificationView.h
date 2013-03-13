@@ -63,4 +63,8 @@ typedef enum {
 //Hide
 - (void)hide;
 
++ (void)hideCurrentNotificationView;
+
++ (void)hideCurrentNotificationViewAndClearQueue;
+
 @end
