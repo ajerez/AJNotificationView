@@ -195,8 +195,13 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
         self.animationTimer = nil;
     }
     
-    //if parent view is a UIWindow, check if the status bar is showing (and offset the view accordingly)
+    //if parent view is a UIWindow, check if the status bar is showing (and offset the view accordin
     double statusBarOffset = ([self.parentView isKindOfClass:[UIWindow class]] && (! [[UIApplication sharedApplication] isStatusBarHidden])) ? [[UIApplication sharedApplication] statusBarFrame].size.height : 0.0;
+    
+    //In landscape orientation height and width are swapped, because the status bar frame is in the screen's coordinate space.
+    if ((int)statusBarOffset == 1024 && ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft)){
+        statusBarOffset = 0.0;
+    }
     
     if ([self.parentView isKindOfClass:[UIView class]] && ![self.parentView isKindOfClass:[UIWindow class]]) {
         
