@@ -18,6 +18,9 @@
 		CB1F1D5815CA8B480058D877 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1F1D5615CA8B480058D877 /* ViewController_iPad.xib */; };
 		CB1F1D6115CA8BA40058D877 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1F1D6015CA8BA40058D877 /* AJNotificationView.m */; };
 		CB1F1D6315CA8EAD0058D877 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F1D6215CA8EAD0058D877 /* QuartzCore.framework */; };
+		CB8054B816F27B8D004A3963 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8054B516F27B8D004A3963 /* Default-568h@2x.png */; };
+		CB8054B916F27B8D004A3963 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8054B616F27B8D004A3963 /* Default.png */; };
+		CB8054BA16F27B8D004A3963 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8054B716F27B8D004A3963 /* Default@2x.png */; };
 		CB91985D15CBF9E400269C5B /* pattern@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91985B15CBF9E400269C5B /* pattern@2X.png */; };
 		CB91985E15CBF9E400269C5B /* pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91985C15CBF9E400269C5B /* pattern.png */; };
 /* End PBXBuildFile section */
@@ -40,6 +43,9 @@
 		CB1F1D5F15CA8BA40058D877 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJNotificationView.h; path = ../../AJNotificationView/AJNotificationView.h; sourceTree = "<group>"; };
 		CB1F1D6015CA8BA40058D877 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AJNotificationView.m; path = ../../AJNotificationView/AJNotificationView.m; sourceTree = "<group>"; };
 		CB1F1D6215CA8EAD0058D877 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB8054B516F27B8D004A3963 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CB8054B616F27B8D004A3963 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CB8054B716F27B8D004A3963 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CB91985B15CBF9E400269C5B /* pattern@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern@2X.png"; sourceTree = "<group>"; };
 		CB91985C15CBF9E400269C5B /* pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +113,9 @@
 		CB1F1D4515CA8B480058D877 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CB8054B516F27B8D004A3963 /* Default-568h@2x.png */,
+				CB8054B616F27B8D004A3963 /* Default.png */,
+				CB8054B716F27B8D004A3963 /* Default@2x.png */,
 				CB1F1D4615CA8B480058D877 /* AJNotificationViewDemo-Info.plist */,
 				CB1F1D4715CA8B480058D877 /* InfoPlist.strings */,
 				CB1F1D4A15CA8B480058D877 /* main.m */,
@@ -150,7 +159,7 @@
 		CB1F1D3115CA8B470058D877 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = CodeApps;
 			};
 			buildConfigurationList = CB1F1D3415CA8B470058D877 /* Build configuration list for PBXProject "AJNotificationViewDemo" */;
@@ -180,6 +189,9 @@
 				CB1F1D5815CA8B480058D877 /* ViewController_iPad.xib in Resources */,
 				CB91985D15CBF9E400269C5B /* pattern@2X.png in Resources */,
 				CB91985E15CBF9E400269C5B /* pattern.png in Resources */,
+				CB8054B816F27B8D004A3963 /* Default-568h@2x.png in Resources */,
+				CB8054B916F27B8D004A3963 /* Default.png in Resources */,
+				CB8054BA16F27B8D004A3963 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +246,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -262,6 +277,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
