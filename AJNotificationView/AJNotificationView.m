@@ -42,7 +42,7 @@
 
 @end
 
-#define PANELHEIGHT  50.0f
+//#define PANELHEIGHT  50.0f
 
 static NSMutableArray *notificationQueue = nil;       // Global notification queue
 
@@ -54,10 +54,10 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame andResponseBlock:nil];
+    return [self initWithFrame:frame forTitle:@"" inParentView:nil andResponseBlock:nil];
 }
 
-- (id)initWithFrame:(CGRect)frame andResponseBlock:(void (^)(void))response
+- (id)initWithFrame:(CGRect)frame forTitle: (NSString *) title inParentView: (UIView *) parentView andResponseBlock:(void (^)(void))response
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -68,26 +68,37 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
         self.animationTimer = nil;
         
         //Title Label
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width -10, PANELHEIGHT)];
+        _parentView = parentView;
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, [self widthForLabel], [self heightForLabelWithTitle: title])];
         _titleLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
-        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue"size:15];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        _titleLabel.font = [self titleFont];
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
         _titleLabel.alpha = 0.0;
         _titleLabel.backgroundColor = [UIColor clearColor];
+        _titleLabel.text = title;
         [self addSubview:_titleLabel];
         
         // Button
         _detailDisclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        _detailDisclosureButton.frame = CGRectMake(self.bounds.size.width - 10.0 - _detailDisclosureButton.frame.size.width, (PANELHEIGHT - _detailDisclosureButton.frame.size.height) / 2, _detailDisclosureButton.frame.size.width, _detailDisclosureButton.frame.size.height);
+        _detailDisclosureButton.frame = CGRectMake(self.bounds.size.width - 10.0 - _detailDisclosureButton.frame.size.width, (50.f - _detailDisclosureButton.frame.size.height) / 2, _detailDisclosureButton.frame.size.width, _detailDisclosureButton.frame.size.height);
         _detailDisclosureButton.hidden = YES;
         [_detailDisclosureButton addTarget:self action:@selector(detailDisclosureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_detailDisclosureButton];
     }
     return self;
 }
-
+- (CGFloat) heightForLabelWithTitle: (NSString *) title {
+    CGFloat height = fmaxf([title sizeWithFont:[self titleFont]
+                     constrainedToSize:CGSizeMake([self widthForLabel], self.parentView.bounds.size.height)].height, 50.f);
+    return height;
+}
+- (CGFloat) widthForLabel {
+    return self.bounds.size.width - 10.f;
+}
+- (UIFont *) titleFont {
+    return [UIFont boldSystemFontOfSize:15.0];
+}
 - (void)drawRect:(CGRect)rect
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -144,11 +155,12 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 
 + (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval offset:(float)offset delay:(NSTimeInterval)delayInterval detailDisclosure:(BOOL)show response:(void (^)(void))response {
     
-    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 1) andResponseBlock:response];
+    AJNotificationView *noticeView = [[self alloc] initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 0)
+                                                        forTitle:title
+                                                    inParentView:view
+                                                andResponseBlock:response];
     noticeView.notificationType = type;
-    noticeView.titleLabel.text = title;
     noticeView.linedBackground = backgroundType == AJLinedBackgroundTypeDisabled ? NO : YES;
-    noticeView.parentView = view;
     noticeView.backgroundType = backgroundType;
     noticeView.offset = offset;
     noticeView.hideInterval = hideInterval;
@@ -211,7 +223,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     
     //Change label width if detail disclosure is active
     if(self.showDetailDisclosure)
-        _titleLabel.frame = CGRectMake(10.0, 0, self.bounds.size.width -50, PANELHEIGHT);
+        _titleLabel.frame = CGRectMake(10.0, 0, self.bounds.size.width - 50, [self heightForLabelWithTitle: self.titleLabel.text]);
 
     //Animation
     [UIView animateWithDuration:0.5f
@@ -219,10 +231,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.alpha = 1.0;
-                         self.frame = CGRectMake(0.0,
-                                                       0.0 + self.offset,
-                                                       self.frame.size.width,
-                                                       PANELHEIGHT);
+                         self.frame = CGRectMake(0.0,self.offset, self.frame.size.width, [self heightForLabelWithTitle: self.titleLabel.text] + 5.f);
                          self.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
@@ -411,12 +420,12 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     //bottom line
     CGContextSaveGState(ctx);
     CGContextSetRGBFillColor(ctx, 0.1f, 0.1f, 0.1f, 1.0f);
-    CGContextFillRect(ctx, CGRectMake(0, PANELHEIGHT, self.bounds.size.width, 1));
+    CGContextFillRect(ctx, CGRectMake(0, [self heightForLabelWithTitle:self.titleLabel.text] + 5.f, self.bounds.size.width, 1));
     CGContextSetLineWidth(ctx, 1.5f);
     CGContextSetRGBStrokeColor(ctx, 0.4f, 0.4f, 0.4f, 1.0f);
     CGContextBeginPath(ctx);
-    CGContextMoveToPoint(ctx, 0, PANELHEIGHT);
-    CGContextAddLineToPoint(ctx, rect.size.width, PANELHEIGHT);
+    CGContextMoveToPoint(ctx, 0, [self heightForLabelWithTitle:self.titleLabel.text] + 5.f);
+    CGContextAddLineToPoint(ctx, rect.size.width, [self heightForLabelWithTitle:self.titleLabel.text] + 5.f);
     CGContextStrokePath(ctx);
     CGContextRestoreGState(ctx);
     
