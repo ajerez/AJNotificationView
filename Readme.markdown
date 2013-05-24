@@ -11,6 +11,11 @@ only notification in the queue, then its delay interval is honored. If it is not
 the only notification in the queue, it is placed at the end of the queue, and
 then displayed without a delay once it reaches the front of the queue (Thanks to @DazeEnd).
 
+
+<div class="macbuildserver-block">
+    <a class="macbuildserver-button" href="http://macbuildserver.com/project/github/build/?xcode_project=AJNotificationViewDemo%2FAJNotificationViewDemo.xcodeproj&amp;target=AJNotificationViewDemo&amp;repo_url=git%3A%2F%2Fgithub.com%2Fajerez%2FAJNotificationView.git&amp;build_conf=Release" target="_blank"><img src="http://com.macbuildserver.github.s3-website-us-east-1.amazonaws.com/button_up.png"/></a><br/><sup><a href="http://macbuildserver.com/github/opensource/" target="_blank">by MacBuildServer</a></sup>
+</div>
+
 ### [__Video demo__](https://vimeo.com/47447275)
 
 ![AJNotificationView](https://raw.github.com/ajerez/AJNotificationView/master/screenshot.png)
