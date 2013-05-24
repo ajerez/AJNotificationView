@@ -72,7 +72,7 @@
     //Demo with response block
     [AJNotificationView showNoticeInView:self.view
                                     type:AJNotificationTypeBlue
-                                   title:@"Success notification 1 (Blue)"
+                                   title:@"Success notification 1 (Blue) 12312312312312312312 3123123123123123123123123 1231231231231231231231231231 23123123123123123123123123123123"
                          linedBackground:AJLinedBackgroundTypeAnimated
                                hideAfter:2.5f
                                 response:^{
