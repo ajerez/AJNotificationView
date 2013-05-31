@@ -307,6 +307,17 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     [AJNotificationView hideCurrentNotificationView];
 }
 
++ (void)clearQueue
+{
+    NSUInteger numberOfNotification = [notificationQueue count];
+    
+    if(numberOfNotification > 1)
+    {
+        // remove all notification except the current notification
+        [notificationQueue removeObjectsInRange:NSMakeRange(1, numberOfNotification -1)];
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Touch events
 ////////////////////////////////////////////////////////////////////////
