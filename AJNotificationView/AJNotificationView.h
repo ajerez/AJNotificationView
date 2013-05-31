@@ -68,4 +68,6 @@ typedef enum {
 
 + (void)hideCurrentNotificationViewAndClearQueue;
 
++ (void)clearQueue;
+
 @end
