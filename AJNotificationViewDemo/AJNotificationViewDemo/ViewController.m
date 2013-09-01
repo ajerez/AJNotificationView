@@ -62,7 +62,7 @@
 - (IBAction)showNotificactionWithoutlines:(id)sender {
     
     //Default demo
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeDefault
                                    title:@"Information notification"
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -70,7 +70,7 @@
 }
 - (IBAction)showBlueNotification:(id)sender {
     //Demo with response block
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeBlue
                                    title:@"Success notification 1 (Blue) 12312312312312312312 3123123123123123123123123 1231231231231231231231231231 23123123123123123123123123123123"
                          linedBackground:AJLinedBackgroundTypeAnimated
@@ -84,7 +84,7 @@
 
 - (IBAction)showBlueNotificationWithoutlines:(id)sender {
     //Demo with offset, delay and response block
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeBlue
                                    title:@"Success notification 2 (Blue)"
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -98,14 +98,14 @@
 }
 
 - (IBAction)showGreenNotification:(id)sender {
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeGreen
                                    title:@"Success notification 1 (Green)"
                                hideAfter:2.5f];
 }
 
 - (IBAction)showGreenNotificationWithoutlines:(id)sender {
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeGreen
                                    title:@"Success notification 2 (Green)"
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -113,14 +113,14 @@
 }
 
 - (IBAction)showRedNotification:(id)sender {
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeRed
                                    title:@"Error notification"
                                hideAfter:2.5f];
 }
 
 - (IBAction)showRedNotificationWithoutlines:(id)sender {
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeRed
                                    title:@"Error notification"
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -128,7 +128,7 @@
 }
 
 - (IBAction)showOrangeNotification:(id)sender {
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeOrange
                                    title:@"Warning notification"
                          linedBackground:AJLinedBackgroundTypeAnimated
@@ -145,7 +145,7 @@
         title = @"Detail disclosure and long long long long long long long long text";
     }
     
-    [AJNotificationView showNoticeInView:self.view
+    [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeBlue
                                    title:title
                          linedBackground:AJLinedBackgroundTypeAnimated

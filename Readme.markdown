@@ -31,7 +31,7 @@ Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your 
 
 ``` objective-c
 //Blue notification with animated lined background. Hides after 2,5 seg
-[AJNotificationView showNoticeInView:self.view
+[AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                 type:AJNotificationTypeBlue
                                title:@"Test notification"
                      linedBackground:AJLinedBackgroundTypeAnimated
@@ -41,7 +41,7 @@ Add __QuartzCore.framework__ and drop the __AJNotificationView__ folder in your 
 
 ``` objective-c
 // Orange notification without lined background. Remains visible until the user taps in it, or you call hide method
-AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
+AJNotificationView *panel = [AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                 type:AJNotificationTypeOrange
                                title:@"Test notification"
                      linedBackground:AJLinedBackgroundTypeDisabled
@@ -54,7 +54,7 @@ AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
 ``` objective-c
 // Notification with delay, offset and response block that's called when the user tap in it.
 //Thanks to @DazeEnd for this awesome features
-[AJNotificationView showNoticeInView:self.view
+[AJNotificationView showNoticeInView:[[[UIApplication sharedApplication] delegate] window]
                                     type:AJNotificationTypeBlue
                                    title:@"Oppa Gangnam Style!"
                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -73,7 +73,7 @@ AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
 //Thanks to @smoothdvd for this last feature
 
 //In viewDidLoad register the NSNotification
-- (void)viewDidLoad{   
+- (void)viewDidLoad {   
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(detailDisclosureButtonPressed:)
                                                  name:@"detail_disclosure_button_pressed"
@@ -83,7 +83,7 @@ AJNotificationView *panel = [AJNotificationView showNoticeInView:self.view
 
 //...
 //Function that's called when the NSNotification is fired
-- (void)detailDisclosureButtonPressed:(NSNotification*)notification{
+- (void)detailDisclosureButtonPressed:(NSNotification*)notification {
     NSLog(@"Detail disclosure button pressed");
 }
 
