@@ -62,7 +62,7 @@ typedef enum {
 
 //Hide
 - (void)hide;
-- (UIFont *) titleFont;
+- (UIFont *)titleFont;
 
 + (void)hideCurrentNotificationView;
 

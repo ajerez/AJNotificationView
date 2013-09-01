@@ -24,13 +24,13 @@
 
 @interface AJNotificationView ()
 
-@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *detailDisclosureButton;
 @property (nonatomic) AJNotificationType notificationType;
 @property (nonatomic) AJLinedBackgroundType backgroundType;
-@property (nonatomic,assign) NSTimer* animationTimer;
+@property (nonatomic, assign) NSTimer *animationTimer;
 @property (nonatomic, assign) float moveFactor;
-@property(nonatomic,assign) BOOL linedBackground;
+@property (nonatomic, assign) BOOL linedBackground;
 @property (nonatomic, copy) void (^responseBlock)(void);
 @property (nonatomic, strong) UIView *parentView;
 @property (nonatomic, assign) float offset;
@@ -38,7 +38,7 @@
 @property (nonatomic, assign) BOOL showDetailDisclosure;
 
 - (void)_drawBackgroundInRect:(CGRect)rect;
-- (void) showAfterDelay:(NSTimeInterval)delayInterval;
+- (void)showAfterDelay:(NSTimeInterval)delayInterval;
 
 @end
 
@@ -52,13 +52,11 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 #pragma mark - View LifeCycle
 ////////////////////////////////////////////////////////////////////////
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame forTitle:@"" inParentView:nil andResponseBlock:nil];
 }
 
-- (id)initWithFrame:(CGRect)frame forTitle: (NSString *) title inParentView: (UIView *) parentView andResponseBlock:(void (^)(void))response
-{
+- (id)initWithFrame:(CGRect)frame forTitle: (NSString *) title inParentView: (UIView *) parentView andResponseBlock:(void (^)(void))response {
     self = [super initWithFrame:frame];
     if (self) {
         self.alpha = 0.0f;
@@ -88,25 +86,27 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     }
     return self;
 }
-- (CGFloat) heightForLabelWithTitle: (NSString *) title {
+
+- (CGFloat)heightForLabelWithTitle:(NSString *)title {
     CGFloat height = fmaxf([title sizeWithFont:[self titleFont]
                      constrainedToSize:CGSizeMake([self widthForLabel], self.parentView.bounds.size.height)].height, 50.f);
     return height;
 }
-- (CGFloat) widthForLabel {
+
+- (CGFloat)widthForLabel {
     return self.bounds.size.width - 10.f;
 }
-- (UIFont *) titleFont {
+
+- (UIFont *)titleFont {
     return [UIFont boldSystemFontOfSize:15.0];
 }
-- (void)drawRect:(CGRect)rect
-{
+
+- (void)drawRect:(CGRect)rect {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self _drawBackgroundInRect:(CGRect)rect];
 }
 
-- (void)detailDisclosureButtonPressed:(id)sender
-{
+- (void)detailDisclosureButtonPressed:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"detail_disclosure_button_pressed" object:self];
     [self hide];
 }
@@ -115,21 +115,21 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 #pragma mark - Show
 ////////////////////////////////////////////////////////////////////////
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title {
     //Use default notification type (gray)
     return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:2.5f];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval {
     //Use default notification type (gray)
     return [self showNoticeInView:view type:AJNotificationTypeDefault title:title hideAfter:hideInterval];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title hideAfter:(NSTimeInterval)hideInterval {
     return [self showNoticeInView:view type:type title:title linedBackground:AJLinedBackgroundTypeStatic hideAfter:hideInterval];
 }
 
-+ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval{
++ (AJNotificationView *)showNoticeInView:(UIView *)view type:(AJNotificationType)type title:(NSString *)title linedBackground:(AJLinedBackgroundType)backgroundType hideAfter:(NSTimeInterval)hideInterval {
     return [self showNoticeInView:view type:type title:title linedBackground:backgroundType hideAfter:hideInterval response:nil];
 }
 
@@ -166,14 +166,14 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     noticeView.hideInterval = hideInterval;
     noticeView.showDetailDisclosure = show;
     
-    if(notificationQueue == nil) {
+    if (notificationQueue == nil) {
         
         notificationQueue = [[NSMutableArray alloc] init];
     }
     
     [notificationQueue addObject:noticeView];
     
-    if([notificationQueue count] == 1) {
+    if ([notificationQueue count] == 1) {
         
         // Since this notification is the only one in the queue, it can be shown and its delay interval can be honored.
         [noticeView showAfterDelay:delayInterval];
@@ -182,7 +182,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     return noticeView;
 }
 
-- (void) showAfterDelay:(NSTimeInterval)delayInterval {
+- (void)showAfterDelay:(NSTimeInterval)delayInterval {
     
     [self.parentView addSubview:self];
     
@@ -190,9 +190,8 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     
     BOOL animated = self.backgroundType == AJLinedBackgroundTypeAnimated ? YES : NO;
     
-    if (animated){
-        if (nil == self.animationTimer)
-        {
+    if (animated) {
+        if (nil == self.animationTimer) {
             self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
                                                                          target:self
                                                                        selector:@selector(setNeedsDisplay)
@@ -200,7 +199,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
                                                                         repeats:YES];
         }
     }
-    else{
+    else {
         if (self.animationTimer && self.animationTimer.isValid)
             [self.animationTimer invalidate];
         
@@ -222,7 +221,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     self.offset = fmax(self.offset, statusBarOffset);
     
     //Change label width if detail disclosure is active
-    if(self.showDetailDisclosure)
+    if (self.showDetailDisclosure)
         _titleLabel.frame = CGRectMake(10.0, 0, self.bounds.size.width - 50, [self heightForLabelWithTitle: self.titleLabel.text]);
 
     //Animation
@@ -235,7 +234,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
                          self.titleLabel.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {
-                         if (finished){
+                         if (finished) {
                              if (self.showDetailDisclosure) {
                                  self.detailDisclosureButton.hidden = !self.showDetailDisclosure;
                              }
@@ -251,7 +250,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 #pragma mark - Hide
 ////////////////////////////////////////////////////////////////////////
 
-- (void)hide{
+- (void)hide {
     if ([self.animationTimer isValid]){
         [self.animationTimer invalidate];
         self.animationTimer = nil;
@@ -269,7 +268,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
                          self.titleLabel.alpha = 0.0;
                      }
                      completion:^(BOOL finished) {
-                         if (finished){
+                         if (finished) {
                              [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.1f];
                              
                              // Remove this notification from the queue
@@ -285,21 +284,17 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
                      }];
 }
 
-+ (void)hideCurrentNotificationView
-{
-    if([notificationQueue count] > 0)
-    {
++ (void)hideCurrentNotificationView {
+    if ([notificationQueue count] > 0) {
         AJNotificationView *currentNotification = [notificationQueue objectAtIndex:0];
         [currentNotification hide];
     }
 }
 
-+ (void)hideCurrentNotificationViewAndClearQueue
-{
++ (void)hideCurrentNotificationViewAndClearQueue {
     NSUInteger numberOfNotification = [notificationQueue count];
     
-    if(numberOfNotification > 1)
-    {
+    if (numberOfNotification > 1) {
         // remove all notification except the current notification
         [notificationQueue removeObjectsInRange:NSMakeRange(1, numberOfNotification -1)];
     }
@@ -307,12 +302,10 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     [AJNotificationView hideCurrentNotificationView];
 }
 
-+ (void)clearQueue
-{
++ (void)clearQueue {
     NSUInteger numberOfNotification = [notificationQueue count];
     
-    if(numberOfNotification > 1)
-    {
+    if (numberOfNotification > 1) {
         // remove all notification except the current notification
         [notificationQueue removeObjectsInRange:NSMakeRange(1, numberOfNotification -1)];
     }
@@ -324,7 +317,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self hide];
-    if(self.responseBlock != nil) {
+    if (self.responseBlock != nil) {
         self.responseBlock();
     }
 }
@@ -333,7 +326,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
 #pragma mark - Private
 ////////////////////////////////////////////////////////////////////////
 
-- (void)_drawBackgroundInRect:(CGRect)rect{
+- (void)_drawBackgroundInRect:(CGRect)rect {
     
     self.moveFactor = self.moveFactor > 14.0f ? 0.0f : ++self.moveFactor;
     
@@ -447,7 +440,7 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     self.layer.shadowRadius = 2.0f;
     
     
-    if (self.linedBackground){
+    if (self.linedBackground) {
         //Lines
         CGContextSaveGState(ctx);
         CGContextClipToRect(ctx, self.bounds);
